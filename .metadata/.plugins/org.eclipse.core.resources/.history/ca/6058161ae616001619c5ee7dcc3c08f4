@@ -1,0 +1,44 @@
+
+public class RSA {
+	private long p, y, e, eg, n, emes;
+	private String message;
+	
+	public RSA(){
+		
+	}
+	
+	public  RSA(String mes, long str){
+		message = mes;
+		PNG x = new PNG();
+		x.generate(str);
+		p = x.getP();
+		y = x.getY();
+		n = p*y;
+		eg = (p-1)*(y-1);
+	}
+	
+	public void generateKeys(long str){
+		PNG x = new PNG();
+		x.generate(str);
+		p = x.getP();
+		y = x.getY();
+		n = p*y;
+		eg = (p-1)*(y-1);
+	}
+	
+	public void setKey(long a, long b){
+		p = a;
+		y = b;
+	}
+	
+	public void setMessage(String mes){
+		message = mes;
+	}
+	
+	public long encode(){
+		
+		
+		return emes;
+		
+	}
+}

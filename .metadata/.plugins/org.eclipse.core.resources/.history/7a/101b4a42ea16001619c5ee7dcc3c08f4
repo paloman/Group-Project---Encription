@@ -55,7 +55,6 @@ public class RSA {
 	
 	public void getE(){
 		System.out.println(e);
-		System.out.println(n);
 	}
 	public void getP(){
 		System.out.println(p);

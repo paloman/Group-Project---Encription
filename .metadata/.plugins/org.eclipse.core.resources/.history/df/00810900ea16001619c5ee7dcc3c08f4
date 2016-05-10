@@ -33,7 +33,7 @@ public class RSA {
 		int x = (int) Math.sqrt(k);
 		for(int i =3; i <x ; i++){
 			for(int a =i; a<x;a++){
-				if(i*a==k&&test.isPrime(i, 1)&&test.isPrime(a, 1)){
+				if(i*a==k&&test.isPrime(i, 2)&&test.isPrime(a, 2)){
 					e = i;
 					d = a;
 				}
@@ -44,9 +44,6 @@ public class RSA {
 	public void setKey(long a, long b){
 		p = a;
 		y = b;
-		n = p*y;
-		eg = (p-1)*(y-1);
-		k = 1%eg;
 	}
 	
 	public void setMessage(int mes){
@@ -55,16 +52,12 @@ public class RSA {
 	
 	public void getE(){
 		System.out.println(e);
-		System.out.println(n);
 	}
 	public void getP(){
 		System.out.println(p);
 	}
 	public void getY(){
 		System.out.println(y);
-	}
-	public void getD(){
-		System.out.println(d);
 	}
 	
 	public long encode(){
@@ -88,6 +81,5 @@ public class RSA {
 		enc.getE();
 		enc.getY();
 		enc.getP();
-		enc.getD();
 	}
 }

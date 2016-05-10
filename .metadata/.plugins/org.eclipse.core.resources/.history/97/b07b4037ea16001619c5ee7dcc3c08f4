@@ -44,9 +44,6 @@ public class RSA {
 	public void setKey(long a, long b){
 		p = a;
 		y = b;
-		n = p*y;
-		eg = (p-1)*(y-1);
-		k = 1%eg;
 	}
 	
 	public void setMessage(int mes){
@@ -55,7 +52,6 @@ public class RSA {
 	
 	public void getE(){
 		System.out.println(e);
-		System.out.println(n);
 	}
 	public void getP(){
 		System.out.println(p);
