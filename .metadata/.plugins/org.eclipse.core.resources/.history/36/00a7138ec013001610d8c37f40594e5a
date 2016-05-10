@@ -1,0 +1,11 @@
+import java.util.Scanner;
+
+
+public class PNG {
+	public static void main(String args[]){
+		Scanner key = new Scanner(System.in);
+		System.out.println("Enter Start Number: ");
+		int start = key.nextInt();
+		System.out.println(key);
+	}
+}

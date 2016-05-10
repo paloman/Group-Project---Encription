@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+
+public class PNG {
+	
+	public PNG(){
+		
+	}
+	
+	public boolean isPrime(long s){
+		if(s == 0 || s == 1 || s%2 == 0) return false;
+		double x;
+		int p;
+		x = Math.ceil(Math.sqrt(s));
+		
+		
+		
+		
+
+		return false;
+	}
+	
+	public long findP(long s){
+		while(isPrime(s)==false){
+			
+		}
+		double x;
+		int p;
+		x = Math.ceil(Math.sqrt(s));
+		return s;
+	}
+	
+	public static void main(String args[]){
+		Scanner key = new Scanner(System.in);
+		System.out.println("Enter Start Number: ");
+		long start = key.nextLong();
+		Primes fp = new Primes();
+		fp.millerRabin(start);
+		System.out.println(start);
+	}
+}

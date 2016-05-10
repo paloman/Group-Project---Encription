@@ -1,0 +1,107 @@
+import java.util.ArrayList;
+import java.math.*;
+
+
+class Primes {
+
+
+    private static long[] as = {2, 7, 61};
+
+    private static long modpow(long x, long c, long m) {
+        long result = 1;
+        long aktpot = x;
+        while (c > 0) {
+            if (c % 2 == 1) {
+                result = (result * aktpot) % m;
+            }
+            aktpot = (aktpot * aktpot) % m; 
+            c /= 2;
+        }
+        return result;
+    }
+
+    private static boolean millerRabin(long n) {
+        outer:
+        for (long a : as) {
+            if (a < n) {
+                long s = 0;
+                long d = n - 1;
+                while (d % 2 == 0) {
+                    s++;
+                    d /= 2;
+                }
+
+                long x = modpow(a, d, n);
+                if (x != 1 && x != n - 1) {
+                    for (long r = 1; r < s; r++) {
+                        x = (x * x) % n;
+                        if (x == 1) {
+                            return false;
+                        }
+                        if (x == n - 1) {
+                            continue outer;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public static boolean IsPrime(long num) {
+        if (num <= 1) {
+            return false;
+        } else if (num <= 3) {
+            return true;
+        } else if (num % 2 == 0) {
+            return false;
+        } else {
+            return millerRabin(num);
+        }
+    }
+    public static int[] primes(int min, int max) {
+           ArrayList<Integer> primesList = new ArrayList<Integer>();
+
+           for( int i=min; i<max; i++ ){
+                if( IsPrime(i) ){
+                   primesList.add(i);
+                }
+           }
+
+           int[] primesArray = new int[primesList.size()];
+           for(int i=0; i<primesArray.length; i++){
+               primesArray[i] = (int) primesList.get(i);
+           }
+
+           return primesArray;
+        }
+
+
+    public static String tostring (int [] arr){
+        String ans="";
+        for (int i=0; i<arr.length;i++){
+            ans= ans+arr[i]+ " ";
+        }
+        return ans;
+    }
+     public static int closestPrime(int num) {
+            int count=1;    
+            for (int i=num;;i++){
+
+                int plus=num+count, minus=num-count;
+                if (IsPrime(minus)){
+
+                    return minus;
+
+                }
+
+                if (IsPrime(plus)) {
+                    return plus;
+
+                }
+                count=count+1;
+            }
+        }
+}

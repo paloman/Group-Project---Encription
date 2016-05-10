@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+
+public class PNG {
+	
+
+	public static void main(String args[]){
+		 Scanner scan = new Scanner(System.in);
+	        MillerRabin mr = new MillerRabin();
+	        /** Accept number **/
+	        System.out.println("Enter number\n");
+	        long num = scan.nextLong();
+	        /** Accept number of iterations **/
+	        System.out.println("\nEnter number of iterations");
+	        int k = scan.nextInt();
+	        /** check if prime **/
+	        boolean prime = mr.isPrime(num, k);
+	        while(prime != true){
+            	num++;
+            	prime = mr.isPrime(num, k);
+            }
+	        if (prime)
+	            System.out.println("\n"+ num );
+	            
+	}
+}

@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+
+public class PNG {
+	
+	public PNG(){
+		
+	}
+	
+	public int findP(int s){
+		double x;
+		int p;
+		x = Math.ceil(Math.sqrt(s));
+		return s;
+	}
+	
+	public static void main(String args[]){
+		Scanner key = new Scanner(System.in);
+		System.out.println("Enter Start Number: ");
+		long start = key.nextLong();
+		Primes fp = new Primes();
+		fp.closestPrime(start);
+		System.out.println(start);
+	}
+}
