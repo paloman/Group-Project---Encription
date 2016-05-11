@@ -15,8 +15,6 @@ public class RSA {
 		y = x.getY();
 		n = p*y;
 		eg = (p-1)*(y-1);
-		generateE();
-		//generateD();
 		k = 1%eg;
 	}
 	
@@ -27,40 +25,20 @@ public class RSA {
 		y = x.getY();
 		n = p*y;
 		eg = (p-1)*(y-1);
-		generateE();
-		//generateD();
 		k = 1%eg;
 	}
 	
-	public static long greatestCommon(long eg2, long b)
-    {
-        while (eg2 != 0 && b != 0)
-        {
-            if (eg2 >= b)
-            {
-                eg2 = eg2 - b;
-            }
-            else
-                b = b - eg2;
-        }
-        if (eg2 == 0) return b;
-        else return eg2;
-    }
-	
 	public void generateE(){
-		int i = 6;
-		boolean bob = true;
-		while(bob){
-		i++;
-		if(1== greatestCommon(eg,i)) bob = false;
-		
+		MillerRabin test = new MillerRabin();
+		int x = (int) Math.sqrt(k);
+		for(int i =3; i <x ; i++){
+			for(int a =i; a<x;a++){
+				if(i*a==k&&test.isPrime(i, 1)&&test.isPrime(a, 1)){
+					e = i;
+					d = a;
+				}
+			}
 		}
-		e = i;
-		d = i;
-	}
-	
-	public void generateD(){
-		d = e;
 	}
 	
 	public void setKey(long a, long b){
@@ -68,7 +46,6 @@ public class RSA {
 		y = b;
 		n = p*y;
 		eg = (p-1)*(y-1);
-		generateE();
 		k = 1%eg;
 	}
 	
@@ -78,6 +55,7 @@ public class RSA {
 	
 	public void getE(){
 		System.out.println(e);
+		System.out.println(n);
 	}
 	public void getP(){
 		System.out.println(p);
@@ -105,12 +83,11 @@ public class RSA {
 	public static void main(String args[]){
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
-		enc.setMessage(32);
+		enc.setMessage(15);
 		enc.generateE();
 		enc.getE();
+		enc.getY();
+		enc.getP();
 		enc.getD();
-		System.out.println(enc.encode());
-		System.out.println(enc.decode());
-		
 	}
 }

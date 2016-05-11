@@ -16,7 +16,7 @@ public class RSA {
 		n = p*y;
 		eg = (p-1)*(y-1);
 		generateE();
-		//generateD();
+		generateD();
 		k = 1%eg;
 	}
 	
@@ -28,7 +28,7 @@ public class RSA {
 		n = p*y;
 		eg = (p-1)*(y-1);
 		generateE();
-		//generateD();
+		generateD();
 		k = 1%eg;
 	}
 	
@@ -56,7 +56,6 @@ public class RSA {
 		
 		}
 		e = i;
-		d = i;
 	}
 	
 	public void generateD(){
@@ -105,7 +104,7 @@ public class RSA {
 	public static void main(String args[]){
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
-		enc.setMessage(32);
+		enc.setMessage(15);
 		enc.generateE();
 		enc.getE();
 		enc.getD();

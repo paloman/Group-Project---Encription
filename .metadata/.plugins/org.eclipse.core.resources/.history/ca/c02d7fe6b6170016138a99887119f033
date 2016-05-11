@@ -105,7 +105,7 @@ public class RSA {
 	public static void main(String args[]){
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
-		enc.setMessage(32);
+		enc.setMessage(15);
 		enc.generateE();
 		enc.getE();
 		enc.getD();
