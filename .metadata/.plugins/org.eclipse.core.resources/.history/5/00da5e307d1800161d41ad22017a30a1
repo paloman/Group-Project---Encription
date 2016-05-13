@@ -1,15 +1,13 @@
-import java.util.*;
-import java.math.*;
+
 public class RSA {
-	BigInteger p, y, e, eg, n, emes, d, k;
-	BigInteger one, p, q, E, D, n,P,Q;
-	private BigInteger message;
+	private long p, y, e, eg, n, emes, d, k;
+	private int message;
 	
 	public RSA(){
 		
 	}
 	
-	public  RSA(BigInteger mes, BigInteger str){
+	public  RSA(int mes, long str){
 		message = mes;
 		PNG x = new PNG();
 		x.generate(str);
@@ -60,10 +58,7 @@ public class RSA {
 	}
 	
 	public void generateD(){
-		D=new BigInteger(String.valueOf(i));
-	if(((D.multiply(E)).mod(P.multiply(Q))).equals(BigInteger.ONE))
-		break;
-		}
+		d = e;
 	}
 	
 	public void setKey(long a, long b){
@@ -91,15 +86,15 @@ public class RSA {
 		System.out.println(d);
 	}
 	
-	public BigInteger encode(){
-		emes =  (Math.pow(message, e)%(n));
+	public long encode(){
+		emes = (long) (Math.pow(message, e)%(n));
 		
 		return emes;
 		
 	}
 	
-	public BigInteger decode(){
-		message = (Math.pow(emes, d)%(n));
+	public long decode(){
+		message = (int) (Math.pow(emes, d)%(n));
 		
 		return message;
 	}
@@ -107,10 +102,10 @@ public class RSA {
 	public static void main(String args[]){
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
-		enc.setMessage(32);
+		enc.setMessage(15);
 		enc.generateE();
-		//enc.getE();
-		//enc.getD();
+		enc.getE();
+		enc.getD();
 		System.out.println(enc.encode());
 		System.out.println(enc.decode());
 		//RSA b = new RSA(1351246, 500);

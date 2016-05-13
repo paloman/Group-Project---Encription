@@ -1,15 +1,14 @@
-import java.util.*;
-import java.math.*;
+
 public class RSA {
 	BigInteger p, y, e, eg, n, emes, d, k;
 	BigInteger one, p, q, E, D, n,P,Q;
-	private BigInteger message;
+	private int message;
 	
 	public RSA(){
 		
 	}
 	
-	public  RSA(BigInteger mes, BigInteger str){
+	public  RSA(int mes, long str){
 		message = mes;
 		PNG x = new PNG();
 		x.generate(str);
@@ -91,15 +90,15 @@ public class RSA {
 		System.out.println(d);
 	}
 	
-	public BigInteger encode(){
-		emes =  (Math.pow(message, e)%(n));
+	public long encode(){
+		emes = (long) (Math.pow(message, e)%(n));
 		
 		return emes;
 		
 	}
 	
-	public BigInteger decode(){
-		message = (Math.pow(emes, d)%(n));
+	public long decode(){
+		message = (int) (Math.pow(emes, d)%(n));
 		
 		return message;
 	}

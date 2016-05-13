@@ -1,15 +1,14 @@
-import java.math.BigInteger;
 import java.util.Scanner;
 
 
 public class PNG {
-	private BigInteger p, y;
+	private long p, y;
 	public PNG(){
 		p = 0;
 		y = 0;
 	}
 	
-	public void generate(BigInteger num){
+	public void generate(long num){
 		int it = 10; 
 		int k = 2;
 		MillerRabin mr = new MillerRabin();
