@@ -68,16 +68,15 @@ public class RSA {
 	}
 	
 	public void setKey(long a, long b){
-		p.equals(a);
-		y.equals(b);
-		n.equals(p.multiply(y));
-		eg.equals(p.subtract(BigInteger.ONE).multiply(y.subtract(BigInteger.ONE)));
+		p = a;
+		y = b;
+		n = p*y;
+		eg = (p-1)*(y-1);
 		generateE();
-		generateD();
 	}
 	
-	public void setMessage(long mes){
-		message.equals(mes);
+	public void setMessage(int mes){
+		message = mes;
 	}
 	
 	public void getE(){
@@ -94,14 +93,14 @@ public class RSA {
 	}
 	
 	public BigInteger encode(){
-		emes.equals((message.modPow(e,n)));
+		emes =  (Math.pow(message, e)%(n));
 		
 		return emes;
 		
 	}
 	
 	public BigInteger decode(){
-		message.equals(emes.modPow(emes,n));
+		message = (Math.pow(emes, d)%(n));
 		
 		return message;
 	}
@@ -110,7 +109,7 @@ public class RSA {
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
 		enc.setMessage(32);
-		//enc.generateE();
+		enc.generateE();
 		//enc.getE();
 		//enc.getD();
 		System.out.println(enc.encode());

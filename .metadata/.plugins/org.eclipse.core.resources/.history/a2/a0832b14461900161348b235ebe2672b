@@ -110,7 +110,7 @@ public class RSA {
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
 		enc.setMessage(32);
-		//enc.generateE();
+		enc.generateE();
 		//enc.getE();
 		//enc.getD();
 		System.out.println(enc.encode());
