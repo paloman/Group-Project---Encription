@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+
+public class PNG {
+	private long p, y;
+	public PNG(){
+		p = 0;
+		y = 0;
+	}
+	
+	public void generate(long num){
+		int it = 10; 
+		int k = 2;
+		MillerRabin mr = new MillerRabin();
+		
+		 boolean prime = mr.isPrime(num, k);
+	        while(prime != true){
+        	num++;
+        	prime = mr.isPrime(num, k);
+        }
+	        if (prime)
+	         p = num;
+	    num = num*10000;
+	    prime = mr.isPrime(num, k);
+	    while(prime != true){
+       	num++;
+       	prime = mr.isPrime(num, k);
+       }
+	        if (prime)
+	         y = num;
+	}
+	
+	public long getP(){
+		return p;
+	}
+	
+	public long getY(){
+		return y;
+	}
+	
+	//public static void main(String args[]){
+		 /*Scanner scan = new Scanner(System.in);
+	        MillerRabin mr = new MillerRabin();
+	        /** Accept number **/
+	     /*   System.out.println("Enter number\n");
+	        long num = scan.nextLong();
+	        /** Accept number of iterations **/
+	      /*  System.out.println("\nEnter number of iterations");
+	        int k = scan.nextInt();
+	        /** check if prime **/
+	     /*   boolean prime = mr.isPrime(num, k);
+	        while(prime != true){
+            	num++;
+            	prime = mr.isPrime(num, k);
+            }
+	        if (prime)
+	            System.out.println("\n"+ num );*/
+	            
+	//}
+}

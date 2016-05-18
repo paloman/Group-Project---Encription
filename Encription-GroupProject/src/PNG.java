@@ -1,25 +1,29 @@
+import java.math.BigInteger;
 import java.util.Scanner;
 
 
 public class PNG {
-	private long p, y;
+	private BigInteger p, y;
 	public PNG(){
-		p = 0;
-		y = 0;
+		p.equals(0);
+		y.equals(0);
 	}
 	
-	public void generate(long num){
+	public void generate(BigInteger num){
 		int it = 10; 
+		int k = 2;
+		BigInteger a = BigInteger(1);
+		long ab = num.longValue();
 		MillerRabin mr = new MillerRabin();
 		
-		 boolean prime = mr.isPrime(num, k);
+		 boolean prime = mr.isPrime(num.longValue(), k);
 	        while(prime != true){
-        	num++;
-        	prime = mr.isPrime(num, k);
+        	num.add(1);
+        	prime = mr.isPrime( num.longValue(), k);
         }
 	        if (prime)
 	         p = num;
-	    num = num*10000;
+	    num = num.multiply(10000);
 	    prime = mr.isPrime(num, k);
 	    while(prime != true){
        	num++;
@@ -29,11 +33,11 @@ public class PNG {
 	         y = num;
 	}
 	
-	public long getP(){
+	public BigInteger getP(){
 		return p;
 	}
 	
-	public long getY(){
+	public BigInteger getY(){
 		return y;
 	}
 	

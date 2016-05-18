@@ -1,0 +1,116 @@
+
+public class RSA {
+	private long p, y, e, eg, n, emes, d, k;
+	private int message;
+	
+	public RSA(){
+		
+	}
+	
+	public  RSA(int mes, long str){
+		message = mes;
+		PNG x = new PNG();
+		x.generate(str);
+		p = x.getP();
+		y = x.getY();
+		n = p*y;
+		eg = (p-1)*(y-1);
+		generateE();
+		//generateD();
+	}
+	
+	public void generateKeys(long str){
+		PNG x = new PNG();
+		x.generate(str);
+		p = x.getP();
+		y = x.getY();
+		n = p*y;
+		eg = (p-1)*(y-1);
+		generateE();
+		//generateD();
+	}
+	
+	public static long greatestCommon(long eg2, long b)
+    {
+        while (eg2 != 0 && b != 0)
+        {
+            if (eg2 >= b)
+            {
+                eg2 = eg2 - b;
+            }
+            else
+                b = b - eg2;
+        }
+        if (eg2 == 0) return b;
+        else return eg2;
+    }
+	
+	public void generateE(){
+		int i = 6;
+		boolean bob = true;
+		while(bob){
+		i++;
+		if(1== greatestCommon(eg,i)) bob = false;
+		
+		}
+		e = i;
+		d = i;
+	}
+	
+	public void generateD(){
+		d = e;
+	}
+	
+	public void setKey(long a, long b){
+		p = a;
+		y = b;
+		n = p*y;
+		eg = (p-1)*(y-1);
+		generateE();
+	}
+	
+	public void setMessage(int mes){
+		message = mes;
+	}
+	
+	public void getE(){
+		System.out.println(e);
+	}
+	public void getP(){
+		System.out.println(p);
+	}
+	public void getY(){
+		System.out.println(y);
+	}
+	public void getD(){
+		System.out.println(d);
+	}
+	
+	public long encode(){
+		emes = (long) (Math.pow(message, e)%(n));
+		
+		return emes;
+		
+	}
+	
+	public long decode(){
+		message = (int) (Math.pow(emes, d)%(n));
+		
+		return message;
+	}
+	
+	public static void main(String args[]){
+		RSA enc = new RSA();
+		enc.setKey(3, 13);
+		enc.setMessage(32);
+		enc.generateE();
+		enc.getE();
+		enc.getD();
+		System.out.println(enc.encode());
+		System.out.println(enc.decode());
+		//RSA b = new RSA(1351246, 500);
+		//System.out.println(b.encode());
+		//System.out.println(b.decode());
+		
+	}
+}
