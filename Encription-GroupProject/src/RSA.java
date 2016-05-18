@@ -2,13 +2,13 @@ import java.util.*;
 import java.math.*;
 public class RSA {
 	BigInteger p, y, e, eg, n, emes, d, k, x;
-	BigInteger one, p, q, E, D, n,P,Q;
+	BigInteger one, q, E, D,P,Q;
 	private BigInteger message;
-	
+
 	public RSA(){
-		
+
 	}
-	
+
 	public  RSA(BigInteger mes, BigInteger str){
 		message = mes;
 		PNG x = new PNG();
@@ -16,22 +16,22 @@ public class RSA {
 		p = x.getP();
 		y = x.getY();
 		n = p.multiply(y);
-		eg = (p.subtract(1)).multiply(y.subtract(1));
+		eg = (p.subtract(BigInteger.ONE)).multiply(y.subtract(BigInteger.ONE));
 		generateE();
 		//generateD();
 	}
-	
+
 	public void generateKeys(BigInteger str){
 		PNG x = new PNG();
 		x.generate(str);
 		p = x.getP();
 		y = x.getY();
-		n = p*y;
-		eg = (p-1)*(y-1);
+		n = p.multiply(y);
+		eg = (p.subtract(BigInteger.ONE)).multiply(y.subtract(BigInteger.ONE));
 		generateE();
 		//generateD();
 	}
-	
+
 	public static long greatestCommon(long eg2, long b)
     {
         while (eg2 != 0 && b != 0)
@@ -46,40 +46,44 @@ public class RSA {
         if (eg2 == 0) return b;
         else return eg2;
     }
-	
+
 	public void generateE(){
-		long i = 6;
+		BigInteger i =  BigInteger.valueOf(6);
 		boolean bob = true;
 		while(bob){
-		i++;
-		if(((P.gcd(E)).equals(BigInteger.ONE))&&((Q.gcd(E)).equals(BigInteger.ONE))) bob = false;
+		if(((p.gcd(i)).equals(BigInteger.ONE))&&((y.gcd(i)).equals(BigInteger.ONE))){ bob = false;}
+		i.add(BigInteger.ONE);
 		}
-		e.equals(i);
-		
+		e = i;
+
 	}
-	
+
 	public void generateD(){
-		for(int i = 1;;i++)
+		BigInteger i = BigInteger.valueOf(5);
+		boolean phil = true;
+		while(phil)
 		{
 		D=new BigInteger(String.valueOf(i));
-		if(((D.multiply(E)).mod(P.multiply(Q))).equals(BigInteger.ONE))
-		break;
+		if(((D.multiply(i)).mod(p.multiply(y))).equals(BigInteger.ONE))
+		{phil = false;
+			break;}
+		i.add(BigInteger.ONE);
 		}
 	}
-	
+
 	public void setKey(long a, long b){
-		p.equals(a);
-		y.equals(b);
-		n.equals(p.multiply(y));
-		eg.equals(p.subtract(BigInteger.ONE).multiply(y.subtract(BigInteger.ONE)));
+		p =  BigInteger.valueOf(a);
+		y = BigInteger.valueOf(b);
+		n = p.multiply(y);
+		eg = p.subtract(BigInteger.ONE).multiply(y.subtract(BigInteger.ONE));
 		generateE();
 		generateD();
 	}
-	
+
 	public void setMessage(long mes){
-		message.equals(mes);
+		message = BigInteger.valueOf(mes);
 	}
-	
+
 	public void getE(){
 		System.out.println(e);
 	}
@@ -92,27 +96,27 @@ public class RSA {
 	public void getD(){
 		System.out.println(d);
 	}
-	
+
 	public BigInteger encode(){
-		emes.equals((message.modPow(e,n)));
-		
+		emes=((message.modPow(e,n)));
+
 		return emes;
-		
+
 	}
-	
+
 	public BigInteger decode(){
-		message.equals(emes.modPow(emes,n));
-		
+		message =(emes.modPow(emes,n));
+
 		return message;
 	}
-	
+
 	public static void main(String args[]){
 		RSA enc = new RSA();
 		enc.setKey(3, 13);
-		enc.setMessage(32);
+		enc.setMessage(12);
 		//enc.generateE();
-		//enc.getE();
-		//enc.getD();
+		enc.getE();
+		enc.getD();
 		System.out.println(enc.encode());
 		System.out.println(enc.decode());
 		//RSA b = new RSA(1351246, 500);
@@ -120,6 +124,6 @@ public class RSA {
 		//enc.getD();
 		//System.out.println(b.encode());
 		//System.out.println(b.decode());
-		
+
 	}
 }
